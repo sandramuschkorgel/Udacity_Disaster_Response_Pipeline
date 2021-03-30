@@ -39,7 +39,7 @@ def load_data(database_filepath):
     
     """
     
-    engine = create_engine(f'sqlite:///{database_filepath}.db')
+    engine = create_engine(f'sqlite:///{database_filepath}')
     df = pd.read_sql_table('categorized_messages', con=engine)
     
     X = df['message']
@@ -88,51 +88,57 @@ def build_model():
         ('clf', MultiOutputClassifier(estimator=RandomForestClassifier()))
     ])
     
+    # Uncommenting more parameters will give better exploring power but 
+    # will increase processing time in a combinatorial way
     parameters = {
+        #'vect__max_df': (0.5, 0.75, 1.0),
+        #'vect__ngram_range': ((1, 1), (1, 2)),
         'clf__estimator__n_estimators': [5, 10],
         'clf__estimator__bootstrap': (True, False),
-        'clf__estimator__criterion': ('gini', 'entropy'),
+        #'clf__estimator__criterion': ('gini', 'entropy')
     }
 
+    # Change cv=2 to cv=None for a 5 fold cross validation
     cv = GridSearchCV(pipeline, param_grid=parameters, 
-                      scoring='f1_macro', verbose=3, cv=None, n_jobs=-1)
+                      scoring='f1_macro', verbose=3, cv=2, n_jobs=-1)
     
     return cv
 
 
-def evaluate_model(model, X_test, y_test, category_names):
+def evaluate_model(model, X_test, Y_test, category_names):
     """
-    Prints out accuracy, precision, recall, and f1 score for the model.
+    Print out accuracy, precision, recall, and f1 score for the model.
     
     ARGUMENTS:
     model - model fitted on training dataset
     X_test - test feature dataset
-    y_test - test target dataset
+    Y_test - test target dataset
     category_names - target variables
     
     RETURN VALUE:
     None
     """
     
-    y_pred = model.predict(X_test)
-    y_pred_ = pd.DataFrame(y_pred)
-    y_test_ = pd.DataFrame(y_test)
+    Y_pred = model.predict(X_test)
+    Y_pred_ = pd.DataFrame(Y_pred)
+    Y_test_ = pd.DataFrame(Y_test)
     
     for i, col in enumerate(category_names):
-        if y_test_[i].sum() == 0:
+        if Y_test_[i].sum() == 0:
             print(col + ' no positive labels in test dataset\n')
         else:
-            accuracy = int(round(100 * accuracy_score(y_test_[i], y_pred_optimized_[i])))
+            accuracy = int(round(100 * accuracy_score(Y_test_[i], Y_pred_[i])))
             print(f'{col} | accuracy: {accuracy}%')
-            print(classification_report(y_test_[i], y_pred_[i]) + '\n')
+            print(classification_report(Y_test_[i], Y_pred_[i]) + '\n')
 
 
 def save_model(model, model_filepath):
-    """Saves model.
+    """
+    Save model to pickle file.
     
     ARGUMENTS:
     model - trained ML model
-    model_filepath - 
+    model_filepath - file path
     
     RETURN VALUE:
     None
