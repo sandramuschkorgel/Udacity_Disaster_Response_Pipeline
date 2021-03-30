@@ -46,10 +46,8 @@ def clean_data(df):
     df.drop('categories', axis=1, inplace=True)
     df.drop_duplicates(inplace=True)
     
-    # Due to initial error in original dataset 
-    # Based on their documentation
-    ## 1 represents 'disaster-related'
-    ## 2 represents 'not disaster-related'
+    # Due to error in original dataset, according to documentation
+    # 1 = 'disaster-related' | 2 = 'not disaster-related'
     # Change 2's to 0's
     df.loc[df[df['related'] == 2].index, 'related'] = 0
             
@@ -68,7 +66,7 @@ def save_data(df, database_filename):
     None
     """
     
-    engine = create_engine(f'sqlite:///{database_filename}.db')
+    engine = create_engine(f'sqlite:///{database_filename}')
     df.to_sql('categorized_messages', engine, index=False, if_exists='replace')  
     
 
