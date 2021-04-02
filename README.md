@@ -53,3 +53,6 @@ Use the text input field and type in a message of your choosing. Hit the *Classi
 
 ## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Acknowledgments
+This project is part of the Udacity [Data Scientist Nanodegree](https://www.udacity.com/course/data-scientist-nanodegree--nd025). Thanks to [Appen](https://appen.com/press-release/appen-to-acquire-figure-eight/) (formerly known as Figure Eight) for providing the original datasets.
