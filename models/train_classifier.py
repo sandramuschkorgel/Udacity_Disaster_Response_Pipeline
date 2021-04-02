@@ -36,17 +36,19 @@ def load_data(database_filepath):
     database_filepath - SQLite database
     
     RETURN VALUES:
-    
+    X - independent variable
+    Y - dependent or target variables
+    category_names - category labels
     """
     
     engine = create_engine(f'sqlite:///{database_filepath}')
     df = pd.read_sql_table('categorized_messages', con=engine)
     
     X = df['message']
-    y = df.iloc[:, 4:].values
+    Y = df.iloc[:, 4:].values
     category_names = df.columns[4:]
     
-    return X, y, category_names
+    return X, Y, category_names
 
 
 def tokenize(text):
