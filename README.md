@@ -16,6 +16,10 @@ The repository is separated into three parts:
 * app directory containing all files required to run the web app
 
 ## Dependencies/Pre-requisites
+In order to run this project install the following packages
+* numpy, pandas, sqlalchemy  
+* sklearn, nltk, pickle 
+* flask, plotly
 
 ## Installation and Usage
 ```bash
