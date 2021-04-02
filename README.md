@@ -51,6 +51,13 @@ Go to <http://0.0.0.0:3001/>
 
 Use the text input field and type in a message of your choosing. Hit the *Classify Message* button and you are presented with the labels associated with your message.
 
+#### Web app user interface after submitting a text message
+![Image 2](screenshots/img_2.png)
+
+#### Three visualizations of the training dataset
+![Image 4](screenshots/img_4.png)
+![Image 6](screenshots/img_6.png)
+
 ## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
