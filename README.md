@@ -7,13 +7,13 @@ The Flask-based web application provides a user interface for a text message cla
 * what kind of disaster the message is referring to.
 
 The repository is separated into three parts:
-* `data` directory
+* data directory
   * two csv files containing the original datasets
-  * process_data.py merges both csv files and saves the cleaned data in a SQLite database
-* `models` directory
-  * train_classifier.py returns a classifier model trained on the cleaned data
-  * classifier.pkl containing the model and its parameters will be stored here (not part of this repository though)
-* `app` directory containing all files required to run the web app
+  * `process_data.py` merges both csv files and saves the cleaned data in a SQLite database
+* models directory
+  * `train_classifier.py` returns a classifier model trained on the cleaned data
+  * `classifier.pkl` containing the model and its parameters will be stored here (not part of this repository)
+* app directory containing all files required to run the web app
 
 ## Dependencies/Pre-requisites
 
@@ -24,13 +24,13 @@ git clone https://github.com/sandramuschkorgel/Udacity_Disaster_Response_Pipelin
 
 **Cleaning the original datasets** 
 ```bash
-cd [project\'s root directory]
+cd [project root directory]
 python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
 ```
 
 **Running the ML Pipeline**
 ```bash
-cd [project\'s root directory]
+cd [project root directory]
 python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 ```
 
@@ -39,7 +39,7 @@ python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 In order to use the web app it is required to run both, the cleaning step as well as the ML pipeline.
 
 ```bash
-cd [app sub-directory within the project\'s root directory]
+cd [app sub-directory within project root directory]
 python run.py
 ```
 
